@@ -7,4 +7,13 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+
+  # resources :patients, only: %i[index show new create edit update]
+  # resources :prescriptions
+
+  # namespace :admin do
+  #   resources :doctors
+  #   resources :patients
+  #   resources :prescriptions
+  # end
 end
