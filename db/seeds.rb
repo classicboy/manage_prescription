@@ -7,3 +7,14 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+unless Doctor.exists?
+  5.times do
+    doctor = FactoryBot.create(:doctor)
+
+    5.times do
+      patient = FactoryBot.create(:patient, doctor:)
+      FactoryBot.create(:prescription, patient:)
+    end
+  end
+end
