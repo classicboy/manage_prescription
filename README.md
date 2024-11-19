@@ -1,24 +1,7 @@
-# README
+# manage_prescription
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Help private clinic doctors manage prescriptions issued to patients:
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* Add new prescriptions
+* List of previously issued prescriptions in history
+* Search for prescriptions based on patient information
