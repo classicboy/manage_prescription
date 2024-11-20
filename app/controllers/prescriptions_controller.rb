@@ -1,3 +1,5 @@
 class PrescriptionsController < ApplicationController
-  def index; end
+  def index
+    @prescriptions = current_doctor.prescriptions.includes(:patient)
+  end
 end
