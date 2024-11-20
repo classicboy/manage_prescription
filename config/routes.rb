@@ -3,10 +3,10 @@ Rails.application.routes.draw do
 
   get "up" => "rails/health#show", as: :rails_health_check
 
-  # root "prescriptions#index"
+  root "prescriptions#index"
 
   # resources :patients, only: %i[index show new create edit update]
-  # resources :prescriptions
+  resources :prescriptions
 
   # namespace :admin do
   #   resources :doctors
