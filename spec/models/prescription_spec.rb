@@ -4,4 +4,5 @@ RSpec.describe Prescription, type: :model do
   it { is_expected.to belong_to(:patient) }
 
   it { is_expected.to validate_presence_of(:detail) }
+  it { is_expected.to validate_presence_of(:date) }
 end
