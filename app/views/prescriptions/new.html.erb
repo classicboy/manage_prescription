@@ -1,0 +1,40 @@
+<%= turbo_frame_tag :prescriptions, class: "w-full flex-col space-y-12" do %>
+  <h1 class="text-3xl">New Prescription</h1>
+
+  <%= form_with model: @prescription, local: true do |form| %>
+    <% if @prescription.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@prescription.errors.count, "error") %> prohibited this prescription from being saved:</h2>
+        <ul>
+          <% @prescription.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= form.label :patient_id, "Select Patient" %>
+      <%= form.collection_select :patient_id, current_doctor.patients, :id, :name, prompt: "Choose a patient" %>
+    </div>
+
+    <div class="field">
+      <%= form.label :detail %>
+      <%= form.text_area :detail %>
+    </div>
+
+    <div class="field">
+      <%= form.label :date %>
+      <%= form.date_field :date %>
+    </div>
+
+    <div class="field">
+      <%= form.label :remark %>
+      <%= form.text_area :remark %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit "Create Prescription" %>
+    </div>
+  <% end %>
+<% end %>

@@ -1,0 +1,23 @@
+<%= turbo_frame_tag :prescriptions, class: "w-full flex-col space-y-12" do %>
+  <h1 class="text-3xl">Prescription Detail</h1>
+
+  <div class="flex-col space-y-6">
+    <p><strong>Patient Name:</strong> <%= @prescription.patient_name %> </p>
+    <p><strong>Patient Phone:</strong> <%= @prescription.patient_phone %> </p>
+
+    <div class="flex-col space-y-4">
+      <div>
+        <p><strong>Detail:</strong><br>
+        <p><%= @prescription.detail %></p>
+      </div>
+      <div>
+        <p><strong>Date:</strong><br>
+        <p><%= @prescription.date %></p>
+      </div>
+      <div>
+        <p><strong>Remark:</strong><br>
+        <p><%= @prescription.remark %></p>
+      </div>
+    </div>
+  </div>
+<% end %>
