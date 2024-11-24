@@ -1,0 +1,25 @@
+<%# locals: (form:, resource:, attribute:, container_class: "flex flex-col items-end gap-y-2", actions_class:"flex flex-row items-start gap-x-2") -%>
+
+<%- frame_id = dom_id(form.object, "#{attribute}_turbo_frame") %>
+
+<%= turbo_frame_tag frame_id, class: container_class do %>
+  <%= form_with model: form.object, url: resource, method: :patch do |form| %>
+    <div class="<%= container_class %>">
+      <%= yield %>
+
+      <div class="<%= actions_class %>">
+        <%= link_to resource, class: "cursor-pointer inline-flex items-center rounded-md border font-bold items-center justify-center w-[42px] h-[42px]" do %>
+          <svg width='18' height='18' viewBox='0 0 18 18' fill='none' xmlns='http://www.w3.org/2000/svg'>
+            <path fill-rule='evenodd' clip-rule='evenodd' d='M1.17472 1.17472C1.63033 0.719105 2.36902 0.719105 2.82463 1.17472L8.99967 7.34976L15.1747 1.17472C15.6303 0.719106 16.369 0.719106 16.8246 1.17472C17.2802 1.63033 17.2802 2.36902 16.8246 2.82463L10.6496 8.99968L16.8246 15.1747C17.2802 15.6303 17.2802 16.369 16.8246 16.8246C16.369 17.2802 15.6303 17.2802 15.1747 16.8246L8.99967 10.6496L2.82463 16.8246C2.36902 17.2802 1.63033 17.2802 1.17472 16.8246C0.719105 16.369 0.719105 15.6303 1.17472 15.1747L7.34976 8.99968L1.17472 2.82463C0.719105 2.36902 0.719105 1.63033 1.17472 1.17472Z' fill='#333333'/>
+          </svg>
+        <%- end %>
+
+        <%= form.button data: { turbo_frame: frame_id }, class: "cursor-pointer inline-flex rounded-md border border-red-500 bg-red-500 text-white font-bold items-center justify-center w-[42px] h-[42px]" do %>
+          <svg width='20' height='20' viewBox='0 0 20 14' fill='none' xmlns='http://www.w3.org/2000/svg'>
+            <path fill-rule='evenodd' clip-rule='evenodd' d='M18.992 0.341709C19.4476 0.79732 19.4476 1.53601 18.992 1.99162L7.32528 13.6583C6.86967 14.1139 6.13098 14.1139 5.67537 13.6583L1.0087 8.99162C0.553089 8.53601 0.553089 7.79732 1.0087 7.34171C1.46431 6.8861 2.20301 6.8861 2.65862 7.34171L6.50033 11.1834L17.342 0.341709C17.7976 -0.113903 18.5363 -0.113903 18.992 0.341709Z' fill='white'/>
+          </svg>
+        <%- end %>
+      </div>
+    </div>
+  <% end %>
+<% end %>

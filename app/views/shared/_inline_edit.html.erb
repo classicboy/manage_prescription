@@ -1,0 +1,19 @@
+<%# locals: (model:, resource:, attribute:, container_class: "flex flex-row items-center justify-between group relative", actions_class:"group-hover:block hidden absolute top-0 right-0") -%>
+
+<%- frame_id = dom_id(model, "#{attribute}_turbo_frame") %>
+
+<%= form_with model:, url: resource, method: :patch, data: { turbo_frame: frame_id } do |form| %>
+  <%= turbo_frame_tag frame_id do %>
+    <div class="<%= container_class %>">
+      <%= yield %>
+
+      <div class="<%= actions_class %>">
+        <%= link_to [:edit, *resource], class: "block rounded-md bg-white p-2 shadow-md" do %>
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke-width="1.6" stroke="currentColor" class="w-5 h-5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
+          </svg>
+        <%- end %>
+      </div>
+    </div>
+  <% end %>
+<% end %>
