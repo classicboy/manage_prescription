@@ -1,4 +1,4 @@
-<div class="w-full flex-col space-y-12">
+<%= turbo_frame_tag :content, class: "w-full flex-col space-y-12" do %>
   <h1 class="text-3xl">Prescriptions List</h1>
 
   <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -32,4 +32,4 @@
       </tbody>
     </table>
   </div>
-</div>
+<% end %>
