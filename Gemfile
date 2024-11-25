@@ -77,6 +77,7 @@ group :test do
   gem "rails-controller-testing"
   gem "selenium-webdriver"
   gem "shoulda-matchers"
+  gem "simplecov"
 end
 
 gem "tailwindcss-rails", "~> 3.0"
