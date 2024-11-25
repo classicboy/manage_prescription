@@ -40,6 +40,11 @@
       <%= form.text_area :remark, placeholder: "Remark", class: "w-full border rounded-md", required: true, rows: 5 %>
     </div>
 
-    <%= form.submit "Submit", class: "text-white cursor-pointer bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 disabled:cursor-not-allowed disabled:bg-gray-500", data: { prescription_form_target: "submitButton" }, disabled: true %>
+    <div class="flex space-x-6">
+      <button class="text-center text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5">
+        <%= link_to "Back To List", prescriptions_path %>
+      </button>
+      <%= form.submit "Submit", class: "text-white cursor-pointer bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 disabled:cursor-not-allowed disabled:bg-gray-500", data: { prescription_form_target: "submitButton" }, disabled: true %>
+    </div>
   <% end %>
 <% end %>
