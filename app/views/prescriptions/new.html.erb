@@ -1,40 +1,45 @@
-<%= turbo_frame_tag :prescriptions, class: "w-full flex-col space-y-12" do %>
+<%= turbo_frame_tag :content, class: "w-full flex-col space-y-12" do %>
   <h1 class="text-3xl">New Prescription</h1>
 
-  <%= form_with model: @prescription, local: true do |form| %>
-    <% if @prescription.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(@prescription.errors.count, "error") %> prohibited this prescription from being saved:</h2>
-        <ul>
-          <% @prescription.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-        </ul>
-      </div>
+  <div class="flex space-x-12 items-center">
+    <div class="flex flex-col space-y-4">
+      <p class="font-semibold">Choose existed Patient</p>
+      <%= turbo_frame_tag :patients, src: patients_path do %>
+        <p>Please wait...</p>
+      <% end %>
+    </div>
+
+    <span class="font-bold">OR</span>
+
+    <div class="flex flex-col space-y-4">
+      <p class="font-semibold">Create New Patient</p>
+      <%= turbo_frame_tag :new_patient, src: new_patient_path do %>
+        <p>Please wait...</p>
+      <% end %>
+    </div>
+  </div>
+
+  <%= form_with model: @prescription, class: "max-w-3xl flex flex-col space-y-4 items-start", data: { controller: "prescription-form" } do |form| %>
+    <%= turbo_frame_tag :patient, class: "flex flex-col space-y-2", data: { action: "turbo:frame-load->prescription-form#handleFrameLoad" } do %>
+      <p class="text-red-500 font-semibold">Please select or create a Patient before create Prescription</p>
+      <%= form.hidden_field :patient_id, data: { "prescription-form-target": "patientId" } %>
     <% end %>
 
-    <div class="field">
-      <%= form.label :patient_id, "Select Patient" %>
-      <%= form.collection_select :patient_id, current_doctor.patients, :id, :name, prompt: "Choose a patient" %>
+    <div class="w-full flex flex-col space-y-2">
+      <%= form.label :detail, "Detail", class: "font-bold" %>
+      <%= form.text_area :detail, placeholder: "Detail", class: "border rounded-md", required: true, rows: 5 %>
     </div>
 
-    <div class="field">
-      <%= form.label :detail %>
-      <%= form.text_area :detail %>
+    <div class="w-full flex flex-col space-y-2">
+      <%= form.label :detail, "Detail", class: "font-bold" %>
+      <%= form.date_field :date, placeholder: "Date", class: "w-full border rounded-md", required: true %>
     </div>
 
-    <div class="field">
-      <%= form.label :date %>
-      <%= form.date_field :date %>
+    <div class="w-full flex flex-col space-y-2">
+      <%= form.label :detail, "Detail", class: "font-bold" %>
+      <%= form.text_area :remark, placeholder: "Remark", class: "w-full border rounded-md", required: true, rows: 5 %>
     </div>
 
-    <div class="field">
-      <%= form.label :remark %>
-      <%= form.text_area :remark %>
-    </div>
-
-    <div class="actions">
-      <%= form.submit "Create Prescription" %>
-    </div>
+    <%= form.submit "Submit", class: "text-white cursor-pointer bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 disabled:cursor-not-allowed disabled:bg-gray-500", data: { prescription_form_target: "submitButton" }, disabled: true %>
   <% end %>
 <% end %>

@@ -1,0 +1,9 @@
+<%= turbo_frame_tag :new_patient do %>
+  <%= form_with model: @patient, class: "flex gap-4 align-center" do |form| %>
+    <%= form.text_field :name, placeholder: "Name", class: "border rounded-md", required: true %>
+    <%= form.text_field :phone, placeholder: "Phone", class: "border rounded-md", required: true %>
+    <%= form.date_field :dob, placeholder: "Birthday", class: "border rounded-md", required: true %>
+
+    <%= form.submit "Submit", class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5", data: { turbo_frame: :patient } %>
+  <% end %>
+<% end %>

@@ -1,0 +1,12 @@
+<%= turbo_frame_tag :patients do %>
+  <%= select_tag "patient_id", 
+                  options_for_select(@patients.collect{ |patient| ["#{patient.name} | #{patient.phone}", patient.id] }),
+                  class: "border rounded-md",
+                  data: {
+                    controller: "fetch-from-select",
+                    action: "change->fetch-from-select#fetchData",
+                    fetch_from_select_url_value: patients_path,
+                    fetch_from_select_turbo_frame_id_value: "patient",
+                  } 
+  %>
+<% end %>

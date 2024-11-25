@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   root "prescriptions#index"
 
-  # resources :patients, only: %i[index show new create edit update]
+  resources :patients, only: %i[index show new create]
   resources :prescriptions
 
   # namespace :admin do
