@@ -3,14 +3,19 @@ require "rails_helper"
 RSpec.describe PrescriptionsController, type: :controller do
   let(:doctor) { create(:doctor) }
   let(:patient) { create(:patient, doctor: doctor) }
-  let(:prescription) { create(:prescription, patient: patient) }
+  let(:prescription) { create(:prescription, patient: patient, date: DateTime.now) }
 
   before { sign_in doctor }
 
   describe "GET #index" do
-    before { get :index }
-
+    before do
+      create_list(:prescription, 20, patient: patient)
+      get :index
+    end
+      
     it { expect(assigns(:prescriptions)).to include(prescription) }
+    it { expect(assigns(:prescriptions).size).to eq(10) }
+    it { expect(assigns(:pagy)).to be_a(Pagy) }
     it { expect(response).to render_template(:index) }
   end
 

@@ -1,9 +1,16 @@
 class PrescriptionsController < ApplicationController
+  include Pagy::Backend
+
+  PRESCRIPTIONS_PER_PAGE = 10
+
   before_action :prepare_prescription, only: [:show, :edit, :update]
   before_action :prepare_patient, only: [:create]
 
   def index
-    @prescriptions = current_doctor.prescriptions.includes(:patient)
+    @pagy, @prescriptions = pagy(
+      current_doctor.prescriptions.includes(:patient).order(date: :desc),
+      limit: PRESCRIPTIONS_PER_PAGE
+    )
   end
 
   def show; end
