@@ -1,7 +1,44 @@
 <%= turbo_frame_tag :content, class: "w-full flex flex-col gap-12" do %>
   <h1 class="text-3xl">Prescriptions List</h1>
 
-  <%= link_to "New Prescription", new_prescription_path, class: "max-w-fit text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5", data: { turbo_action: :advance } %>
+  <div class="flex justify-between">
+    <%= link_to "New Prescription", new_prescription_path, class: "max-w-fit text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5", data: { turbo_action: :advance } %>
+
+    <%= form_with url: prescriptions_path, method: :get, class: "flex space-x-6", data: { turbo_action: :advance, controller: "reveal" } do %>
+      <%= search_tag(:search_query, params[:search_query], placeholder: "Search by Patient name or Patient phone", input_class: "text-sm w-80") %>
+
+      <div class="flex space-x-8 items-center">
+        <div class="relative bg-white mt-3 sm:mt-0 flex gap-4">
+          <button class="rounded border py-2 px-6" data-action="reveal#toggle" type="button">
+            <div class="flex">
+              Date Filter
+              <% if params[:start_date].present? || params[:end_date].present? %>
+                <svg class="h-6 w-6 ml-2"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <path d="M5 12l5 5l10 -10" /></svg>
+              <% else %>
+                <svg class="h-6 w-6 ml-2"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" /></svg>
+              <% end %>
+            </div>
+          </button>
+
+          <div class="filter-block hidden absolute top-12 right-0 shadow-lg rounded-lg p-4 border-1 bg-white z-10 min-w-[360px]" data-reveal-target="item">
+            <div class="mb-6">
+              <div class="font-semibold text-sm mb-3">Date Range</div>
+              <div class="flex space-x-3">
+                <div class="relative">
+                  <%= date_field_tag :start_date, params[:start_date], class: "border-gray-300 rounded-md w-full", autocomplete: "off" %>
+                </div>
+                <div class="relative">
+                  <%= date_field_tag :end_date, params[:end_date], class: "border-gray-300 rounded-md w-full", autocomplete: "off" %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <%= submit_tag "Apply", class: "max-w-fit cursor-pointer rounded bg-red-500 hover:bg-red-600 text-white py-2 px-6 font-semibold" %>
+    <% end %>
+  </div>
 
   <div class="flex flex-col space-y-6">
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -15,10 +52,10 @@
               Patient Phone
             </th>
             <th scope="col" class="px-6 py-3">
-              Prescription Detail
+              Detail
             </th>
             <th scope="col" class="px-6 py-3">
-              Prescription Date
+              Date
             </th>
             <th scope="col" class="px-6 py-3">
               Remark

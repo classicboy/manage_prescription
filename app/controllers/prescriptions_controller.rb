@@ -1,5 +1,6 @@
 class PrescriptionsController < ApplicationController
   include Pagy::Backend
+  include ContentConcern
 
   PRESCRIPTIONS_PER_PAGE = 10
 
@@ -8,7 +9,7 @@ class PrescriptionsController < ApplicationController
 
   def index
     @pagy, @prescriptions = pagy(
-      current_doctor.prescriptions.includes(:patient).order(date: :desc),
+      filter_records(current_doctor.prescriptions.includes(:patient)).order(date: :desc),
       limit: PRESCRIPTIONS_PER_PAGE
     )
   end
