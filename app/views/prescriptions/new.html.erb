@@ -1,7 +1,7 @@
-<%= turbo_frame_tag :content, class: "w-full flex-col gap-12" do %>
+<%= turbo_frame_tag :content, class: "w-full flex-col space-y-12" do %>
   <h1 class="text-3xl">New Prescription</h1>
 
-  <div class="flex space-x-12 items-center">
+  <div class="flex gap-y-6 xl:gap-x-12 flex-col xl:flex-row items-start xl:items-center">
     <div class="flex flex-col space-y-4">
       <p class="font-semibold">Choose existed Patient</p>
       <%= turbo_frame_tag :patients, src: patients_path do %>

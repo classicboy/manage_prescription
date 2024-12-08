@@ -1,5 +1,5 @@
 <%= turbo_frame_tag :new_patient do %>
-  <%= form_with model: @patient, class: "flex gap-4 align-center" do |form| %>
+  <%= form_with model: @patient, class: "flex gap-4 align-center flex-col md:flex-row" do |form| %>
     <%= form.text_field :name, placeholder: "Name", class: "border rounded-md", required: true %>
     <%= form.text_field :phone, placeholder: "Phone", class: "border rounded-md", required: true %>
     <%= form.date_field :dob, placeholder: "Birthday", class: "border rounded-md", required: true %>
